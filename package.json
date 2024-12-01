@@ -1,0 +1,47 @@
+{
+  "name": "@sunwood-ai-labs/duckduckgo-web-search",
+  "version": "0.1.0",
+  "description": "DuckDuckGo Web Search MCP Server - A simple web search implementation using DuckDuckGo API",
+  "type": "module",
+  "bin": {
+    "duckduckgo-web-search": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "duckduckgo",
+    "search",
+    "claude",
+    "model-context-protocol",
+    "sunwood-ai-labs"
+  ],
+  "author": "Maki",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0",
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sunwood-ai-labs/duckduckgo-web-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sunwood-ai-labs/duckduckgo-web-search/issues"
+  },
+  "homepage": "https://github.com/Sunwood-ai-labs/duckduckgo-web-search#readme"
+}
