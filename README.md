@@ -1,6 +1,6 @@
 # duckduckgo-web-search MCP Server
 
- duckduckgo-web-search
+A Model Context Protocol server
 
 This is a TypeScript-based MCP server that implements a simple notes system. It demonstrates core MCP concepts by providing:
 
@@ -68,3 +68,7 @@ npm run inspector
 ```
 
 The Inspector will provide a URL to access debugging tools in your browser.
+
+## API仕様書
+
+詳細なAPI仕様については、[API仕様書](api-specification.md)をご覧ください。
