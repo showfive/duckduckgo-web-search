@@ -2,3 +2,4 @@ node_modules/
 build/
 *.log
 .env*
+.github/pull_request_template.md

@@ -1,18 +1,20 @@
 {
-  "name": "duckduckgo-web-search",
-  "version": "0.1.0",
-  "description": "A Model Context Protocol server",
-  "private": true,
+  "name": "@showfive/duckduckgo-web-search",
+  "version": "1.0.3",
+  "description": "A Model Context Protocol (MCP) server providing DuckDuckGo web search and browsing capabilities for AI assistants",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
-    "duckduckgo-web-search": "./build/index.js"
+    "duckduckgo-mcp": "./build/index.js"
   },
   "files": [
     "build"
   ],
   "scripts": {
-    "start" : "node build/index.js",
-    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "start": "node build/index.js",
+    "build": "tsc && node -e \"if (process.platform !== 'win32') { require('fs').chmodSync('build/index.js', 0o755); }\"",
     "watch": "tsc --watch",
     "inspector": "npx @modelcontextprotocol/inspector build/index.js"
   },

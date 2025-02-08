@@ -6,17 +6,17 @@ import { isWebBrowseArgs, isDuckDuckGoWebSearchArgs } from "./types.js";
 import { performBrowse } from "./web-browser.js";
 import { performWebSearch } from "./search-engine.js";
 
-// Server implementation
+// サーバーの実装
 const server = new Server({
-    name: "example-servers/duckduckgo-search",
-    version: "0.1.0",
+    name: "duckduckgo-web-search",
+    version: "1.0.0",
 }, {
     capabilities: {
         tools: {},
     },
 });
 
-// Tool handlers
+// ツールハンドラー
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
     tools: [WEB_SEARCH_TOOL, WEB_BROWSE_TOOL],
 }));
@@ -25,13 +25,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     try {
         const { name, arguments: args } = request.params;
         if (!args) {
-            throw new Error("No arguments provided");
+            throw new Error("引数が指定されていません");
         }
 
         switch (name) {
             case "web_browse": {
                 if (!isWebBrowseArgs(args)) {
-                    throw new Error("Invalid arguments for web_browse");
+                    throw new Error("web_browseツールの引数が不正です");
                 }
                 const { url } = args;
                 const html = await performBrowse(url);
@@ -42,7 +42,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             }
             case "duckduckgo_web_search": {
                 if (!isDuckDuckGoWebSearchArgs(args)) {
-                    throw new Error("Invalid arguments for duckduckgo_web_search");
+                    throw new Error("duckduckgo_web_searchツールの引数が不正です");
                 }
                 const { query, count = 10 } = args;
                 const results = await performWebSearch(query, count);
@@ -53,7 +53,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             }
             default:
                 return {
-                    content: [{ type: "text", text: `Unknown tool: ${name}` }],
+                    content: [{ type: "text", text: `未知のツール: ${name}` }],
                     isError: true,
                 };
         }
@@ -63,7 +63,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             content: [
                 {
                     type: "text",
-                    text: `Error: ${error instanceof Error ? error.message : String(error)}`,
+                    text: `エラー: ${error instanceof Error ? error.message : String(error)}`,
                 },
             ],
             isError: true,
@@ -74,10 +74,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function runServer() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error("DuckDuckGo Search MCP Server running on stdio");
+    console.error("DuckDuckGo Search MCPサーバーがstdioで起動しました");
 }
 
 runServer().catch((error) => {
-    console.error("Fatal error running server:", error);
+    console.error("サーバー起動中の致命的エラー:", error);
     process.exit(1);
 });
