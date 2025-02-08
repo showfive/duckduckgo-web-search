@@ -1,6 +1,6 @@
 {
   "name": "@showfive/duckduckgo-web-search",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Model Context Protocol (MCP) server providing DuckDuckGo web search and browsing capabilities for AI assistants",
   "publishConfig": {
     "access": "public"
